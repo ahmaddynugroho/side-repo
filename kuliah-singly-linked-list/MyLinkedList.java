@@ -1,52 +1,37 @@
-class Node
+class TLinkedList<T>
 {
-    private int data;
-    private Node next;
-    
-    Node(int intData)
-    {
-        this.data = intData;
-    }
+    private Node<T> head;
 
-    void setNext(Node nextNode)
+    static class Node<T>
     {
-        this.next = nextNode;
-    }
+        T data;
+        Node<T> next;
 
-    int getData()
-    {
-        return this.data;
+        Node(T data)
+        {
+            this.data = data;
+        }
     }
-
-    Node getNext()
-    {
-        return this.next;
-    }
-}
-
-class IntLinkedList
-{
-    private Node head;
 
     // print all node starting from head node
     void printList()
     {
         if (this.head != null)
         {
-            Node temp = this.head;
-            while (temp.getNext() != null) {
-                System.out.print(temp.getData() +", ");
-                temp = temp.getNext();
+            Node<T> temp = this.head;
+            while (temp.next != null) {
+                System.out.print(temp.data +", ");
+                temp = temp.next;
             }
 
-            System.out.println(temp.getData());
+            System.out.println(temp.data);
         }
     }
 
     // insert new data before head and use it as head
-    void push(int intData)
+    void push(T tData)
     {
-        Node newNode = new Node(intData);
+        Node<T> newNode = new Node<T>(tData);
 
         if (this.head == null)
         {
@@ -55,16 +40,16 @@ class IntLinkedList
         
         else
         {
-            newNode.setNext(head);
+            newNode.next = this.head;
             this.head = newNode;
         }
     }
 
     // insert new data as the last node
-    void append(int intData)
+    void append(T tData)
     {
-        Node newNode = new Node(intData);
-        Node temp = this.head;
+        Node<T> newNode = new Node<T>(tData);
+        Node<T> temp = this.head;
 
         if (this.head == null)
         {
@@ -73,37 +58,37 @@ class IntLinkedList
         
         else
         {
-            while (temp.getNext() != null)
+            while (temp.next != null)
             {
-                temp = temp.getNext();
+                temp = temp.next;
             }
     
-            temp.setNext(newNode);    
+            temp.next = newNode;
         }
     }
 
-    // insert new data after a certain node data
-    void insertAfter(int key, int newData)
+    // insert new data after a certain Node<T> data
+    void insertAfter(T key, T newData)
     {
-        Node newNode = new Node(newData);
-        Node temp = this.head;
+        Node<T> newNode = new Node<T>(newData);
+        Node<T> temp = this.head;
 
-        while (temp.getNext() != null)
+        while (temp.next != null)
         {
-            if (temp.getData() == key)
+            if (temp.data == key)
             {
-                newNode.setNext(temp.getNext());
-                temp.setNext(newNode);
+                newNode.next = temp.next;
+                temp.next = newNode;
 
                 return;
             }
 
-            temp = temp.getNext();
+            temp = temp.next;
         }
         
-        if (temp.getData() == key)      
+        if (temp.data == key)      
         {
-            temp.setNext(newNode);
+            temp.next = newNode;
         }
         
         else
@@ -112,37 +97,37 @@ class IntLinkedList
         }
     }
 
-    // delete a certain node data
-    void deleteNode(int key)
+    // delete a certain Node<T> data
+    void deleteNode(T key)
     {
-        Node temp = this.head;
-        Node tempPrev = null;
+        Node<T> temp = this.head;
+        Node<T> tempPrev = null;
 
-        if (this.head.getData() == key)
+        if (this.head.data == key)
         {
-            this.head = this.head.getNext();
+            this.head = this.head.next;
 
             return;
         }
 
         else
         {
-            while (temp.getNext() != null)
+            while (temp.next != null)
             {
                 tempPrev = temp;
-                temp = temp.getNext();
+                temp = temp.next;
     
-                if (temp.getData() == key)
+                if (temp.data == key)
                 {
-                    tempPrev.setNext(temp.getNext());
+                    tempPrev.next = temp.next;
     
                     return;
                 }
             }
     
-            if (temp.getData() == key)
+            if (temp.data == key)
             {
-                tempPrev.setNext(null);
+                tempPrev.next = null;
             }
     
             else
@@ -152,7 +137,7 @@ class IntLinkedList
         }
     }
 
-    Node getHead()
+    Node<T> getHead()
     {
         return this.head;
     }
@@ -162,43 +147,43 @@ public class MyLinkedList
 {
     public static void main(String[] args)
     {
-        Scanner key = new Scanner(System.in);
+        //Scanner key = new Scanner(System.in);
                 
-        System.out.println("Singly Linked List v0.1 by Ahmad D. Y. Nugroho\n\n
-                            Select menu:\n
-                            1. ");
+        // System.out.println("Singly Linked List v0.1 by Ahmad D. Y. Nugroho\n\n
+        //                     Select menu:\n
+        //                     1. ");
 
-        // IntLinkedList lList = new IntLinkedList();
+        TLinkedList<String> lList = new TLinkedList<String>();
         
-        // System.out.println("append():");
-        // lList.append(1);
-        // lList.append(2);
-        // lList.append(3);
-        // lList.printList();
+        System.out.println("append():");
+        lList.append("satu");
+        lList.append("dua");
+        lList.append("tiga");
+        lList.printList();
 
-        // System.out.println("\npush():");
-        // lList.push(4);
-        // lList.push(5);
-        // lList.printList();
+        System.out.println("\npush():");
+        lList.push("empat");
+        lList.push("lima");
+        lList.printList();
 
-        // System.out.println("\nappend():");
-        // lList.append(6);
-        // lList.append(7);
-        // lList.printList();
+        System.out.println("\nappend():");
+        lList.append("enam");
+        lList.append("tujuh");
+        lList.printList();
 
-        // System.out.println("\ninsertAfter():");
-        // lList.insertAfter(999, 8);
-        // lList.insertAfter(4, 8);
-        // lList.insertAfter(666, 9);
-        // lList.insertAfter(4, 9);
-        // lList.insertAfter(7, 10);
-        // lList.printList();
+        System.out.println("\ninsertAfter():");
+        lList.insertAfter("sembilanSembilanSembilan", "delapan");
+        lList.insertAfter("empat", "delapan");
+        lList.insertAfter("illuminati", "sembilan");
+        lList.insertAfter("empat", "sembilan");
+        lList.insertAfter("tujuh", "sepuluh");
+        lList.printList();
 
-        // System.out.println("\ndeleteNode():");
-        // lList.deleteNode(5);
-        // lList.deleteNode(7);
-        // lList.deleteNode(666);
+        System.out.println("\ndeleteNode():");
+        lList.deleteNode("lima");
+        lList.deleteNode("tujuh");
+        lList.deleteNode("illuminati");
 
-        // lList.printList();
+        lList.printList();
     }
 }
