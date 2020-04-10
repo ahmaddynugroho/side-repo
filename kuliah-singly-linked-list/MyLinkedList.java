@@ -1,6 +1,7 @@
 class TLinkedList<T>
 {
     private Node<T> head;
+    private Node<T> tail;
 
     static class Node<T>
     {
@@ -36,6 +37,7 @@ class TLinkedList<T>
         if (this.head == null)
         {
             this.head = newNode;
+            this.tail = newNode;
         }
         
         else
@@ -49,21 +51,17 @@ class TLinkedList<T>
     void append(T tData)
     {
         Node<T> newNode = new Node<T>(tData);
-        Node<T> temp = this.head;
-
+        
         if (this.head == null)
         {
             this.head = newNode;
+            this.tail = newNode;
         }
-        
+
         else
         {
-            while (temp.next != null)
-            {
-                temp = temp.next;
-            }
-    
-            temp.next = newNode;
+        this.tail.next = newNode;
+        this.tail = newNode;
         }
     }
 
@@ -140,6 +138,11 @@ class TLinkedList<T>
     Node<T> getHead()
     {
         return this.head;
+    }
+
+    Node<T> getTail()
+    {
+        return this.tail;
     }
 }
 
