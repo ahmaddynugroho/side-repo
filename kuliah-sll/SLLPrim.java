@@ -149,6 +149,29 @@ class TLinkedList<T>
         }
     }
 
+    // Get node data at node with a certain index
+    Object get(int index)
+    {
+        if (index > (this.size-1) || index < 0)
+        {
+            return null;
+        }
+
+        else 
+        {
+            Node<T> temp = this.head;
+            int tempInd = 0;
+
+            while (tempInd < index)
+            {
+                temp = temp.next;
+                tempInd += 1;
+            }
+
+            return temp.data;
+        }
+    }
+
     Node<T> getHead()
     {
         return this.head;
@@ -205,9 +228,13 @@ public class SLLPrim
         lList.deleteNode("lima");
         lList.deleteNode("tujuh");
         lList.deleteNode("illuminati");
-
         lList.printList();
         System.out.println("\nSize:" +lList.size());
+
+        System.out.println("\nget(0):" +lList.get(0));
+        System.out.println("get(5):" +lList.get(5));
+        System.out.println("get(9):" +lList.get(9));
+        System.out.println("get(-6):" +lList.get(-6));
 
 
         System.out.println("\n\n\nSLL Number:");
@@ -246,11 +273,15 @@ public class SLLPrim
         lList2.deleteNode(5);
         lList2.deleteNode(7);
         lList2.deleteNode(666);
-
         lList2.printList();
         System.out.println("\nSize:" +lList2.size());
 
-        
+        System.out.println("\nget(0):" +lList2.get(0));
+        System.out.println("get(5):" +lList2.get(5));
+        System.out.println("get(9):" +lList2.get(9));
+        System.out.println("get(-6):" +lList2.get(-6));
+
+
         System.out.println("\n\n\nSLL Combined:");
         
         TLinkedList<Object> lListC = new TLinkedList<Object>();
@@ -259,5 +290,11 @@ public class SLLPrim
 
         lListC.printList();
         System.out.println("\nSize:" +lListC.size());
+
+        System.out.println("\nget(0):" +lListC.get(0));
+        System.out.println("get(5):" +lListC.get(5));
+        System.out.println("get(20):" +lListC.get(20));
+        System.out.println("get(-6):" +lListC.get(-6));
+
     }
 }

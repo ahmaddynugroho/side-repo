@@ -76,6 +76,72 @@ class MhsSinglyLinkedList
     {
         return this.size;
     }
+
+    Object getNim(int index)
+    {
+        if (index > (this.size-1) || index < 0)
+        {
+            return null;
+        }
+
+        else 
+        {
+            NodeMhs temp = this.head;
+            int tempInd = 0;
+
+            while (tempInd < index)
+            {
+                temp = temp.next;
+                tempInd += 1;
+            }
+
+            return temp.nim;
+        }
+    }
+
+    Object getNama(int index)
+    {
+        if (index > (this.size-1) || index < 0)
+        {
+            return null;
+        }
+
+        else 
+        {
+            NodeMhs temp = this.head;
+            int tempInd = 0;
+
+            while (tempInd < index)
+            {
+                temp = temp.next;
+                tempInd += 1;
+            }
+
+            return temp.nama;
+        }
+    }
+
+    Object getIpk(int index)
+    {
+        if (index > (this.size-1) || index < 0)
+        {
+            return null;
+        }
+
+        else 
+        {
+            NodeMhs temp = this.head;
+            int tempInd = 0;
+
+            while (tempInd < index)
+            {
+                temp = temp.next;
+                tempInd += 1;
+            }
+
+            return temp.ipk;
+        }
+    }
 }
 
 public class SLLMhs {
@@ -92,5 +158,22 @@ public class SLLMhs {
 
         sll.print();
         System.out.println("Size: " +sll.size());
+        System.out.println("\ngetNim(0): " + sll.getNim(0));
+        System.out.println("getNama(0): " + sll.getNama(0));
+        System.out.println("getIpk(0): " + sll.getIpk(0));
+
+        System.out.println("\ngetNim(9): " + sll.getNim(9));
+        System.out.println("getNama(9): " + sll.getNama(9));
+        System.out.println("getIpk(9): " + sll.getIpk(9));
+
+        System.out.println("\ngetNim(30): " + sll.getNim(30));
+        System.out.println("getNama(30): " + sll.getNama(30));
+        System.out.println("getIpk(30): " + sll.getIpk(30));
+
+
+        System.out.println("\ngetNim(-6): " + sll.getNim(-6));
+        System.out.println("getNama(-6): " + sll.getNama(-6));
+        System.out.println("getIpk(-6): " + sll.getIpk(-6));
+
     }
 }
