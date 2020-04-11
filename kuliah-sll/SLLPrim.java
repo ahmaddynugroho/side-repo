@@ -20,12 +20,10 @@ class TLinkedList<T>
         if (this.head != null)
         {
             Node<T> temp = this.head;
-            while (temp.next != null) {
+            while (temp != null) {
                 System.out.print(temp.data +", ");
                 temp = temp.next;
             }
-
-            System.out.println(temp.data);
         }
     }
 
@@ -90,7 +88,7 @@ class TLinkedList<T>
         Node<T> newNode = new Node<T>(newData);
         Node<T> temp = this.head;
 
-        while (temp.next != null)
+        while (temp != null)
         {
             if (temp.data == key)
             {
@@ -103,23 +101,12 @@ class TLinkedList<T>
             temp = temp.next;
         }
         
-        if (temp.data == key)      
-        {
-            temp.next = newNode;
-        }
-        
-        else
-        {
-            System.out.println("Insert failed! There is no \"" +key +"\" in the Linked List");
-        }
+        System.out.println("Insert failed! There is no \"" +key +"\" in the Linked List");
     }
 
     // delete a certain Node<T> data
     void deleteNode(T key)
     {
-        Node<T> temp = this.head;
-        Node<T> tempPrev = null;
-
         if (this.head.data == key)
         {
             this.head = this.head.next;
@@ -129,28 +116,26 @@ class TLinkedList<T>
 
         else
         {
-            while (temp.next != null)
+            Node<T> temp = this.head;
+            Node<T> tempPrev = this.head;
+    
+            while (temp != null)
             {
                 tempPrev = temp;
                 temp = temp.next;
     
-                if (temp.data == key)
+                if (temp != null)
                 {
-                    tempPrev.next = temp.next;
-    
-                    return;
+                    if (temp.data == key)
+                    {
+                        tempPrev.next = temp.next;
+        
+                        return;
+                    }
                 }
             }
-    
-            if (temp.data == key)
-            {
-                tempPrev.next = null;
-            }
-    
-            else
-            {
-                System.out.println("Delete failed! There is no \"" +key +"\" in the Linked List");
-            }
+
+            System.out.println("Delete failed! There is no \"" +key +"\" in the Linked List");
         }
     }
 
