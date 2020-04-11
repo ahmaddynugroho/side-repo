@@ -2,6 +2,7 @@ class MhsSinglyLinkedList
 {
     NodeMhs head;
     NodeMhs tail;
+    int size;
 
     static class NodeMhs
     {
@@ -26,17 +27,20 @@ class MhsSinglyLinkedList
         {
             this.head = newNode;
             this.tail = newNode;
+            this.size += 1;
         }
 
         else if (ipk > this.head.ipk)
         {
             newNode.next = this.head;
             this.head = newNode;
+            this.size += 1;
         }
 
         else if (ipk < this.tail.ipk)
         {
             this.tail.next = newNode;
+            this.size += 1;
         }
 
         else
@@ -52,6 +56,7 @@ class MhsSinglyLinkedList
 
             newNode.next = tempPrev.next;
             tempPrev.next = newNode;
+            this.size += 1;
         }
     }
 
@@ -65,6 +70,11 @@ class MhsSinglyLinkedList
             System.out.println(temp.nim + "-" + temp.ipk + "-" + temp.nama);
             temp = temp.next;
         }
+    }
+
+    int size()
+    {
+        return this.size;
     }
 }
 
@@ -81,5 +91,6 @@ public class SLLMhs {
         }
 
         sll.print();
+        System.out.println("Size: " +sll.size());
     }
 }
