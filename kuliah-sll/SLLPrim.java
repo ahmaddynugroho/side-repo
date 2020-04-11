@@ -65,6 +65,25 @@ class TLinkedList<T>
         }
     }
 
+    void appendList(TLinkedList<T> sll)
+    {
+        if (sll == null)
+        {
+            return;
+        }
+
+        else
+        {
+            Node<T> temp = sll.head;
+
+            while (temp != null)
+            {
+                append(temp.data);
+                temp = temp.next;
+            }
+        }
+    }
+
     // insert new data after a certain Node<T> data
     void insertAfter(T key, T newData)
     {
@@ -152,7 +171,7 @@ public class SLLPrim
     {
         System.out.println("SLL String:");
 
-        TLinkedList<String> lList = new TLinkedList<String>();
+        TLinkedList<Object> lList = new TLinkedList<Object>();
         
         System.out.println("append():");
         lList.append("satu");
@@ -186,9 +205,9 @@ public class SLLPrim
         lList.printList();
 
 
-        System.out.println("\n\n\nSLL Integer:");
+        System.out.println("\n\n\nSLL Number:");
         
-        TLinkedList<Integer> lList2 = new TLinkedList<Integer>();
+        TLinkedList<Object> lList2 = new TLinkedList<Object>();
         
         System.out.println("append():");
         lList2.append(1);
@@ -220,5 +239,14 @@ public class SLLPrim
         lList2.deleteNode(666);
 
         lList2.printList();
+
+
+        System.out.println("\n\n\nSLL Combined:");
+        
+        TLinkedList<Object> lListC = new TLinkedList<Object>();
+        lListC.appendList(lList);
+        lListC.appendList(lList2);
+
+        lListC.printList();
     }
 }
