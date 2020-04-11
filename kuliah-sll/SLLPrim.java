@@ -146,15 +146,11 @@ class TLinkedList<T>
     }
 }
 
-public class MyLinkedList
+public class SLLPrim
 {
     public static void main(String[] args)
     {
-        //Scanner key = new Scanner(System.in);
-                
-        // System.out.println("Singly Linked List v0.1 by Ahmad D. Y. Nugroho\n\n
-        //                     Select menu:\n
-        //                     1. ");
+        System.out.println("SLL String:");
 
         TLinkedList<String> lList = new TLinkedList<String>();
         
@@ -188,5 +184,41 @@ public class MyLinkedList
         lList.deleteNode("illuminati");
 
         lList.printList();
+
+
+        System.out.println("\n\n\nSLL Integer:");
+        
+        TLinkedList<Integer> lList2 = new TLinkedList<Integer>();
+        
+        System.out.println("append():");
+        lList2.append(1);
+        lList2.append(2);
+        lList2.append(3);
+        lList2.printList();
+
+        System.out.println("\npush():");
+        lList2.push(4);
+        lList2.push(5);
+        lList2.printList();
+
+        System.out.println("\nappend():");
+        lList2.append(6);
+        lList2.append(7);
+        lList2.printList();
+
+        System.out.println("\ninsertAfter():");
+        lList2.insertAfter(999, 8);
+        lList2.insertAfter(4, 8);
+        lList2.insertAfter(666, 9);
+        lList2.insertAfter(4, 9);
+        lList2.insertAfter(7, 10);
+        lList2.printList();
+
+        System.out.println("\ndeleteNode():");
+        lList2.deleteNode(5);
+        lList2.deleteNode(7);
+        lList2.deleteNode(666);
+
+        lList2.printList();
     }
 }
