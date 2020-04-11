@@ -17,6 +17,7 @@ class MhsSinglyLinkedList
         }
     }
 
+    // inserting Mhs data as a sorted list according to ipk
     void insert(String nim, String nama, double ipk)
     {
         NodeMhs newNode = new NodeMhs(nim, nama, ipk);
@@ -54,6 +55,7 @@ class MhsSinglyLinkedList
         }
     }
 
+    // print out all Node
     void print()
     {
         NodeMhs temp = this.head;
