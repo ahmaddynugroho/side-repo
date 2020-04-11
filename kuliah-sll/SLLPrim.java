@@ -2,6 +2,7 @@ class TLinkedList<T>
 {
     private Node<T> head;
     private Node<T> tail;
+    private int size;
 
     static class Node<T>
     {
@@ -20,10 +21,12 @@ class TLinkedList<T>
         if (this.head != null)
         {
             Node<T> temp = this.head;
-            while (temp != null) {
+            while (temp.next != null) {
                 System.out.print(temp.data +", ");
                 temp = temp.next;
             }
+
+            System.out.print(temp.data);
         }
     }
 
@@ -36,12 +39,14 @@ class TLinkedList<T>
         {
             this.head = newNode;
             this.tail = newNode;
+            this.size += 1;
         }
         
         else
         {
             newNode.next = this.head;
             this.head = newNode;
+            this.size += 1;
         }
     }
 
@@ -54,18 +59,20 @@ class TLinkedList<T>
         {
             this.head = newNode;
             this.tail = newNode;
+            this.size += 1;
         }
 
         else
         {
-        this.tail.next = newNode;
-        this.tail = newNode;
+            this.tail.next = newNode;
+            this.tail = newNode;
+            this.size += 1;
         }
     }
 
     void appendList(TLinkedList<T> sll)
     {
-        if (sll == null)
+        if (sll.head == null)
         {
             return;
         }
@@ -94,6 +101,7 @@ class TLinkedList<T>
             {
                 newNode.next = temp.next;
                 temp.next = newNode;
+                this.size += 1;
 
                 return;
             }
@@ -110,6 +118,7 @@ class TLinkedList<T>
         if (this.head.data == key)
         {
             this.head = this.head.next;
+            this.size -= 1;
 
             return;
         }
@@ -129,6 +138,7 @@ class TLinkedList<T>
                     if (temp.data == key)
                     {
                         tempPrev.next = temp.next;
+                        this.size -= 1;
         
                         return;
                     }
@@ -136,6 +146,29 @@ class TLinkedList<T>
             }
 
             System.out.println("Delete failed! There is no \"" +key +"\" in the Linked List");
+        }
+    }
+
+    // Get node data at node with a certain index
+    Object get(int index)
+    {
+        if (index > (this.size-1) || index < 0)
+        {
+            return null;
+        }
+
+        else 
+        {
+            Node<T> temp = this.head;
+            int tempInd = 0;
+
+            while (tempInd < index)
+            {
+                temp = temp.next;
+                tempInd += 1;
+            }
+
+            return temp.data;
         }
     }
 
@@ -147,6 +180,11 @@ class TLinkedList<T>
     Node<T> getTail()
     {
         return this.tail;
+    }
+
+    int size()
+    {
+        return this.size;
     }
 }
 
@@ -163,16 +201,19 @@ public class SLLPrim
         lList.append("dua");
         lList.append("tiga");
         lList.printList();
+        System.out.println("\nSize:" +lList.size());
 
         System.out.println("\npush():");
         lList.push("empat");
         lList.push("lima");
         lList.printList();
+        System.out.println("\nSize:" +lList.size());
 
         System.out.println("\nappend():");
         lList.append("enam");
         lList.append("tujuh");
         lList.printList();
+        System.out.println("\nSize:" +lList.size());
 
         System.out.println("\ninsertAfter():");
         lList.insertAfter("sembilanSembilanSembilan", "delapan");
@@ -181,13 +222,19 @@ public class SLLPrim
         lList.insertAfter("empat", "sembilan");
         lList.insertAfter("tujuh", "sepuluh");
         lList.printList();
+        System.out.println("\nSize:" +lList.size());
 
         System.out.println("\ndeleteNode():");
         lList.deleteNode("lima");
         lList.deleteNode("tujuh");
         lList.deleteNode("illuminati");
-
         lList.printList();
+        System.out.println("\nSize:" +lList.size());
+
+        System.out.println("\nget(0):" +lList.get(0));
+        System.out.println("get(5):" +lList.get(5));
+        System.out.println("get(9):" +lList.get(9));
+        System.out.println("get(-6):" +lList.get(-6));
 
 
         System.out.println("\n\n\nSLL Number:");
@@ -199,16 +246,19 @@ public class SLLPrim
         lList2.append(2);
         lList2.append(3);
         lList2.printList();
+        System.out.println("\nSize:" +lList2.size());
 
         System.out.println("\npush():");
         lList2.push(4);
         lList2.push(5);
         lList2.printList();
+        System.out.println("\nSize:" +lList2.size());
 
         System.out.println("\nappend():");
         lList2.append(6);
         lList2.append(7);
         lList2.printList();
+        System.out.println("\nSize:" +lList2.size());
 
         System.out.println("\ninsertAfter():");
         lList2.insertAfter(999, 8);
@@ -217,13 +267,19 @@ public class SLLPrim
         lList2.insertAfter(4, 9);
         lList2.insertAfter(7, 10);
         lList2.printList();
+        System.out.println("\nSize:" +lList2.size());
 
         System.out.println("\ndeleteNode():");
         lList2.deleteNode(5);
         lList2.deleteNode(7);
         lList2.deleteNode(666);
-
         lList2.printList();
+        System.out.println("\nSize:" +lList2.size());
+
+        System.out.println("\nget(0):" +lList2.get(0));
+        System.out.println("get(5):" +lList2.get(5));
+        System.out.println("get(9):" +lList2.get(9));
+        System.out.println("get(-6):" +lList2.get(-6));
 
 
         System.out.println("\n\n\nSLL Combined:");
@@ -233,5 +289,12 @@ public class SLLPrim
         lListC.appendList(lList2);
 
         lListC.printList();
+        System.out.println("\nSize:" +lListC.size());
+
+        System.out.println("\nget(0):" +lListC.get(0));
+        System.out.println("get(5):" +lListC.get(5));
+        System.out.println("get(20):" +lListC.get(20));
+        System.out.println("get(-6):" +lListC.get(-6));
+
     }
 }
