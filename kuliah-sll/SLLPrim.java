@@ -20,12 +20,10 @@ class TLinkedList<T>
         if (this.head != null)
         {
             Node<T> temp = this.head;
-            while (temp.next != null) {
+            while (temp != null) {
                 System.out.print(temp.data +", ");
                 temp = temp.next;
             }
-
-            System.out.println(temp.data);
         }
     }
 
@@ -65,13 +63,32 @@ class TLinkedList<T>
         }
     }
 
+    void appendList(TLinkedList<T> sll)
+    {
+        if (sll == null)
+        {
+            return;
+        }
+
+        else
+        {
+            Node<T> temp = sll.head;
+
+            while (temp != null)
+            {
+                append(temp.data);
+                temp = temp.next;
+            }
+        }
+    }
+
     // insert new data after a certain Node<T> data
     void insertAfter(T key, T newData)
     {
         Node<T> newNode = new Node<T>(newData);
         Node<T> temp = this.head;
 
-        while (temp.next != null)
+        while (temp != null)
         {
             if (temp.data == key)
             {
@@ -84,23 +101,12 @@ class TLinkedList<T>
             temp = temp.next;
         }
         
-        if (temp.data == key)      
-        {
-            temp.next = newNode;
-        }
-        
-        else
-        {
-            System.out.println("Insert failed! There is no \"" +key +"\" in the Linked List");
-        }
+        System.out.println("Insert failed! There is no \"" +key +"\" in the Linked List");
     }
 
     // delete a certain Node<T> data
     void deleteNode(T key)
     {
-        Node<T> temp = this.head;
-        Node<T> tempPrev = null;
-
         if (this.head.data == key)
         {
             this.head = this.head.next;
@@ -110,28 +116,26 @@ class TLinkedList<T>
 
         else
         {
-            while (temp.next != null)
+            Node<T> temp = this.head;
+            Node<T> tempPrev = this.head;
+    
+            while (temp != null)
             {
                 tempPrev = temp;
                 temp = temp.next;
     
-                if (temp.data == key)
+                if (temp != null)
                 {
-                    tempPrev.next = temp.next;
-    
-                    return;
+                    if (temp.data == key)
+                    {
+                        tempPrev.next = temp.next;
+        
+                        return;
+                    }
                 }
             }
-    
-            if (temp.data == key)
-            {
-                tempPrev.next = null;
-            }
-    
-            else
-            {
-                System.out.println("Delete failed! There is no \"" +key +"\" in the Linked List");
-            }
+
+            System.out.println("Delete failed! There is no \"" +key +"\" in the Linked List");
         }
     }
 
@@ -152,7 +156,7 @@ public class SLLPrim
     {
         System.out.println("SLL String:");
 
-        TLinkedList<String> lList = new TLinkedList<String>();
+        TLinkedList<Object> lList = new TLinkedList<Object>();
         
         System.out.println("append():");
         lList.append("satu");
@@ -186,9 +190,9 @@ public class SLLPrim
         lList.printList();
 
 
-        System.out.println("\n\n\nSLL Integer:");
+        System.out.println("\n\n\nSLL Number:");
         
-        TLinkedList<Integer> lList2 = new TLinkedList<Integer>();
+        TLinkedList<Object> lList2 = new TLinkedList<Object>();
         
         System.out.println("append():");
         lList2.append(1);
@@ -220,5 +224,14 @@ public class SLLPrim
         lList2.deleteNode(666);
 
         lList2.printList();
+
+
+        System.out.println("\n\n\nSLL Combined:");
+        
+        TLinkedList<Object> lListC = new TLinkedList<Object>();
+        lListC.appendList(lList);
+        lListC.appendList(lList2);
+
+        lListC.printList();
     }
 }
