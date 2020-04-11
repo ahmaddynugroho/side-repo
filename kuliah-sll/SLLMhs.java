@@ -60,13 +60,11 @@ class MhsSinglyLinkedList
     {
         NodeMhs temp = this.head;
 
-        while (temp.next != null)
+        while (temp != null)
         {
             System.out.println(temp.nim + "-" + temp.ipk + "-" + temp.nama);
             temp = temp.next;
         }
-
-        System.out.println(temp.nim + "-" + temp.ipk + "-" + temp.nama);
     }
 }
 
