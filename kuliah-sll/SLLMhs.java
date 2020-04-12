@@ -1,8 +1,8 @@
 class MhsSinglyLinkedList
 {
-    NodeMhs head;
-    NodeMhs tail;
-    int size;
+    private NodeMhs head;
+    private NodeMhs tail;
+    private int size;
 
     static class NodeMhs
     {
@@ -40,6 +40,7 @@ class MhsSinglyLinkedList
         else if (ipk < this.tail.ipk)
         {
             this.tail.next = newNode;
+            this.tail = newNode;
             this.size += 1;
         }
 
@@ -57,6 +58,54 @@ class MhsSinglyLinkedList
             newNode.next = tempPrev.next;
             tempPrev.next = newNode;
             this.size += 1;
+        }
+    }
+
+    void deleteNode(String nim)
+    {
+        if (this.head == null)
+        {
+            return;
+        }
+
+        else if (this.head.nim.equals(nim))
+        {
+            this.head = this.head.next;
+            this.size -= 1;
+        }
+
+        else if (this.tail.nim.equals(nim))
+        {
+            NodeMhs tempPrev = null;
+            NodeMhs temp = this.head;
+
+            while (temp != null)
+            {
+                tempPrev = temp;
+                temp = temp.next;
+            }
+
+            tempPrev.next = null;
+            this.size -= 1;
+        }
+
+        else
+        {
+            NodeMhs tempPrev = null;
+            NodeMhs temp = this.head;
+
+            while (temp != null)
+            {
+                if (temp.nim.equals(nim))
+                {
+                    tempPrev.next = temp.next;
+                    temp.next = null;
+                    this.size -= 1;
+                }
+
+                tempPrev = temp;
+                temp = temp.next;
+            }
         }
     }
 
@@ -149,11 +198,22 @@ public class SLLMhs {
     {
         MhsSinglyLinkedList sll = new MhsSinglyLinkedList();
 
-        double[] arrTest = {1.0,2.0,5.0,4.0,6.0,8.0,7.0,6.0,4.0,5.0,8.0,0.0,9.0,3.0,4.0,2.0,2.0,5.0,7.0,6.0,8.0,9.0,7.0,6.0,3.0};
+        double[] arrTest = {10.0,2.0,5.0,4.0,6.0,8.0,7.0,6.0,4.0,5.0,8.0,0.0,9.0,3.0,4.0,2.0,2.0,5.0,7.0,6.0,8.0,9.0,7.0,6.0,3.0};
 
+        int i = 1;
         for (double nim : arrTest)
         {
-            sll.insert("19106050001", "Test", nim);
+            if (i < 10)
+            {
+                sll.insert("1910605000" +Integer.toString(i), "Test", nim);
+                i += 1;
+            }
+
+            else
+            {
+                sll.insert("191060500" +Integer.toString(i), "Test", nim);
+                i += 1;
+            }
         }
 
         sll.print();
@@ -175,5 +235,9 @@ public class SLLMhs {
         System.out.println("getNama(-6): " + sll.getNama(-6));
         System.out.println("getIpk(-6): " + sll.getIpk(-6));
 
+        System.out.println("deleteNode(\"19106050001\")");
+        sll.deleteNode("19106050001");
+        sll.print();
+        System.out.println("Size: " +sll.size());;
     }
 }
